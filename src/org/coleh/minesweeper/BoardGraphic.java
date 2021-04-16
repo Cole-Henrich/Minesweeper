@@ -58,16 +58,16 @@ public class BoardGraphic extends BorderPane {
                 int finalJ = j;
                 button1.setText(covered);
                 button1.setOnAction(actionEvent -> {
-                    
                     int space = boardLogic.getSpace(finalI, finalJ);
-
                         if (space == 0) {
-                            for (int k = 0; k < 3; k++) {
-                                boardLogic.pickSpace(finalI, finalJ);//ameliorating the glitch requiring multiple clicks.
-                            }
-                            for (int k = finalI - 1; k <= finalI + 1; k++) {
-                                for (int l = finalJ - 1; l <= finalJ + 1; l++) {
-                                    boardLogic.pickSpace(k, l);
+                            for (int e = 0; e < 3; e++) {
+                                for (int k = finalI - 1; k <= finalI + 1; k++) {
+                                    for (int l = finalJ - 1; l <= finalJ + 1; l++) {
+                                        for (int m = 0; m < 3; m++) {
+                                            boardLogic.pickSpace(k, l);
+                                            button1s[k][l].setText(String.valueOf(boardLogic.getSpace(k, l)));
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -81,16 +81,13 @@ public class BoardGraphic extends BorderPane {
                     if (boardLogic.pickSpace(finalI, finalJ) || wins()) {
                         Stage stage = ((Stage) (getScene().getWindow()));
                         stage.setTitle("Good Game");
-                        boolean winner = false;
+
                        boardLogic.pickSpace(finalI, finalJ);
                        //there is a slight glitch where you have to click an extra time before the game recognizes that you've won.
                         //this "clicks" that for you.
-                        if (wins()) {
-                            winner=true;
-                        }
-                        stage.setScene(new Scene(new finale(winner, finalI, finalJ)));
+
+                        stage.setScene(new Scene(new finale(wins(), finalI, finalJ)));
                     }
-                    render();
                 });
                 button1.setPadding(new Insets(20, 20, 20, 20));
                 row.getChildren().add(button1);
