@@ -369,14 +369,14 @@ private double mandatoryHeight;
 
 
 
-    public int[] autoSize(int rows, int cols){
-        //1430 x 840
+    public void autoSize(int rows, int cols){
+        //1430 x 840 for mac users.
         int width = (int) Math.floor(1430.0/rows);
         int height = (int) Math.floor(840.0/cols);
         this.setStyle("-fx-font-size:40px;");
+        this.setPadding(Insets.EMPTY);
         this.setMinWidth(width);
         this.setMinHeight(height);
-        return new int[]{width, height};
     }
 
 

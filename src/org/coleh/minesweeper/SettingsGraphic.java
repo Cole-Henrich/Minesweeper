@@ -27,8 +27,8 @@ public class SettingsGraphic extends BorderPane{
 
     public SettingsGraphic() {
         this.setPrefSize(540, 540);
-        SpinnerValueFactory factory1 = new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 10, 5, 1);
-        SpinnerValueFactory factory2 = new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 10, 5, 1);
+        SpinnerValueFactory factory1 = new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 10, 10, 1);
+        SpinnerValueFactory factory2 = new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 10, 10, 1);
 
         Spinner RowTextIndicator = new Spinner(factory1);
         Spinner ColumnTextIndicator = new Spinner(factory2);
@@ -52,7 +52,10 @@ public class SettingsGraphic extends BorderPane{
 
         HBox RowTextIndicatorBox = new HBox();
         RowTextIndicatorBox.getChildren().addAll(RowTextIndicator);
-
+        Button1 DevOnly = new Button1("devs", .05);
+        // a button for developers to use when testing recursion on '0's, who don't want to hit mines :)
+        DevOnly.setOpacity(0);
+        //it's not visible, but it is located below "hard".
         Button1 Easy = new Button1("Easy", .166_666_666_666_666_666);
         Button1 Medium = new Button1("Medium",.333_333_333_333_333_333);
         Button1 Hard = new Button1("Hard", 0.5);
@@ -60,7 +63,7 @@ public class SettingsGraphic extends BorderPane{
         Play.setMinSize(40, 40);
         Play.setOpacity(0.5);
 
-        for (Button1 button1: new Button1[] {Easy, Medium, Hard}) {
+        for (Button1 button1: new Button1[] {Easy, Medium, Hard, DevOnly}) {
             button1.setOnAction(actionEvent ->{
                 this.deathTrapRatio = button1.getDeathTrapFrequency();
                 Play.setOpacity(1);
@@ -95,6 +98,7 @@ public class SettingsGraphic extends BorderPane{
         HBox easy = new HBox(Easy);
         HBox medium = new HBox(Medium);
         HBox hard = new HBox(Hard);
+        HBox dev = new HBox(DevOnly);
 
         HBox space_between_levelButtonsHBox = new HBox();
         HBox space_between_levelButtonsHBox2 = new HBox();
@@ -123,7 +127,7 @@ public class SettingsGraphic extends BorderPane{
         VBox1.setVgrow(playBox, Priority.ALWAYS);
 
         VBox1 RightBox = new VBox1();
-        RightBox.getChildren().addAll(easy, space_between_levelButtonsHBox, medium, space_between_levelButtonsHBox2, hard, playBox);
+        RightBox.getChildren().addAll(easy, space_between_levelButtonsHBox, medium, space_between_levelButtonsHBox2, hard, dev, playBox);
 
         HBox.setHgrow(RightBox, Priority.ALWAYS);
         this.setRight(RightBox);
